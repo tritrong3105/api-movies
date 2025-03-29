@@ -18,6 +18,21 @@ app.get("/api/trending", async (req, res) => {
     }
 });
 
+// search movies
+app.get("/api/search", async (req, res) => {
+    try {
+        const { query } = req.query;
+        if (!query) {
+            return res.status(400).json({ error: "Không cos từ khóa tìm kiếm" });
+        }
+
+        const response = await axios.get(`${TMDB_BASE_URL}/search/movie?api_key=${TMDB_API_KEY}&query=${query}`);
+        res.json(response.data);
+    } catch (error) {
+        res.status(500).json({ error: "Không thể lấy dữ liệu phim" });
+    }
+});
+
 
 
 app.listen(PORT, () => {
