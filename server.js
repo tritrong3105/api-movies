@@ -5,7 +5,7 @@ const app = express();
 app.use(cors());
 
 const PORT = 3000;
-const TMDB_API_KEY = "74f8068cab23bf06d29d49bad1183b7c";
+const TMDB_API_KEY = "...";
 const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 
 // danh sách trending
@@ -54,7 +54,6 @@ app.get("/api/movies", async (req, res) => {
         res.status(500).json({ error: "Không thể lấy danh sách phim" });
     }
 });
-
 
 app.listen(PORT, () => {
     console.log(`Server đang chạy tại: http://localhost:${PORT}`);
