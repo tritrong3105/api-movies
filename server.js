@@ -24,13 +24,14 @@ app.get("/api/trending", async (req, res) => {
 // tìm kiếm
 app.get("/api/search", async (req, res) => {
   try {
+    const page = req.query.page || 1;
     const { query } = req.query;
     if (!query) {
       return res.status(400).json({ error: "Không cos từ khóa tìm kiếm" });
     }
 
     const response = await axios.get(
-      `${TMDB_BASE_URL}/search/movie?api_key=${TMDB_API_KEY}&query=${query}`
+      `${TMDB_BASE_URL}/search/movie?api_key=${TMDB_API_KEY}&query=${query}&page=${page}`
     );
     res.json(response.data);
   } catch (error) {
