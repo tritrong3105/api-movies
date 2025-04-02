@@ -11,8 +11,9 @@ const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 // danh sách trending
 app.get("/api/trending", async (req, res) => {
   try {
+    const page = req.query.page || 1;
     const response = await axios.get(
-      `${TMDB_BASE_URL}/trending/movie/week?api_key=${TMDB_API_KEY}`
+      `${TMDB_BASE_URL}/trending/movie/week?api_key=${TMDB_API_KEY}&page=${page}`
     );
     res.json(response.data);
   } catch (error) {
@@ -51,17 +52,17 @@ app.get("/api/movie/:id", async (req, res) => {
 });
 
 // tất cẩ phim
-app.get("/api/movies", async (req, res) => {
-  try {
-    const page = req.query.page || 1;
-    const response = await axios.get(
-      `${TMDB_BASE_URL}/discover/movie?api_key=${TMDB_API_KEY}&page=${page}`
-    );
-    res.json(response.data);
-  } catch (error) {
-    res.status(500).json({ error: "Không thể lấy danh sách phim" });
-  }
-});
+// app.get("/api/movies", async (req, res) => {
+//   try {
+//     const page = req.query.page || 1;
+//     const response = await axios.get(
+//       `${TMDB_BASE_URL}/discover/movie?api_key=${TMDB_API_KEY}&page=${page}`
+//     );
+//     res.json(response.data);
+//   } catch (error) {
+//     res.status(500).json({ error: "Không thể lấy danh sách phim" });
+//   }
+// });
 
 app.listen(PORT, () => {
   console.log(`Server đang chạy tại: http://localhost:${PORT}`);
