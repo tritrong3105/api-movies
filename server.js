@@ -1,12 +1,21 @@
 const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
+const swaggerUi = require("swagger-ui-express");
+const fs = require("fs");
+const YAML = require("yaml");
+
 const app = express();
 app.use(cors());
 
 const PORT = 3000;
 const TMDB_API_KEY = "74f8068cab23bf06d29d49bad1183b7c";
 const TMDB_BASE_URL = "https://api.themoviedb.org/3";
+
+const file = fs.readFileSync("./api-docs.yaml", "utf8");
+const swaggerDocument = YAML.parse(file);
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // danh sách trending
 app.get("/api/trending", async (req, res) => {
