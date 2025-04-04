@@ -4,7 +4,7 @@ info:
   version: "1.0.0"
   description: API cho việc lấy danh sách phim trending, tìm kiếm phim và lấy chi tiết phim từ TMDB.
 servers:
-  - url: http://localhost:3000
+  - url: https://api-movies-f196.onrender.com/
 tags:
   - name: movies
     description: API về thông tin phim
